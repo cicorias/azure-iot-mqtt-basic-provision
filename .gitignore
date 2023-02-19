@@ -14,3 +14,5 @@ _deps
 # output
 build/
 .vscode/settings.json
+certs/**/*.pem
+certs/fingerprint.txt
