@@ -36,7 +36,7 @@ target_link_libraries(az_iot_sample_common
     OpenSSL::Crypto
 )
 
-add_library (az::iot::sample::common ALIAS az_iot_sample_common)
+#add_library (az::iot::sample::common ALIAS az_iot_sample_common)
 
 # Provisioning (Certificates) Sample from SDK
 add_executable (paho_iot_provisioning_sample
@@ -45,7 +45,7 @@ add_executable (paho_iot_provisioning_sample
 
 target_link_libraries(paho_iot_provisioning_sample
   PRIVATE
-    az::iot::sample::common
+    az_iot_sample_common
 )
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
