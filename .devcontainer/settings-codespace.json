@@ -2,5 +2,8 @@
     "cmake.buildDirectory": "${workspaceFolder}/build",
     "cmake.configureArgs": [
         "-DCMAKE_TOOLCHAIN_FILE=/usr/local/vcpkg/scripts/buildsystems/vcpkg.cmake"
-    ]
+    ],
+    "files.associations": {
+        "iot_sample_common.h": "c"
+    }
 }

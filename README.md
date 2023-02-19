@@ -1,7 +1,6 @@
 # azure-iot-mqtt-basic-provision
 simple azure IoT DPS provision validation example
 
-
 ## Initial Run
 
 ### Repair vcpkg clone
@@ -21,9 +20,10 @@ git checkout tags/2022.10.19
 
 ```
 
-
 ### Set .vscode/setting.json
-CMake projects should use: "-DCMAKE_TOOLCHAIN_FILE=/usr/local/vcpkg/scripts/buildsystems/vcpkg.cmake"
+>NOTE: see the note section below on config options.
+
+CMake projects should use: `-DCMAKE_TOOLCHAIN_FILE=/usr/local/vcpkg/scripts/buildsystems/vcpkg.cmake`
 
 ```json
 {
@@ -38,7 +38,7 @@ CMake projects should use: "-DCMAKE_TOOLCHAIN_FILE=/usr/local/vcpkg/scripts/buil
 ```
 
 
-### Install some vcpkg
+### Install some vcpkg packages
 
 >NOTE: this takes time for the pull and build
 ```
@@ -47,19 +47,13 @@ vcpkg install openssl
 vcpkg install paho-mqtt
 ```
 
-```cmake
-# this is heuristically generated, and may not be correct
-find_package(eclipse-paho-mqtt-c CONFIG REQUIRED)
-    target_link_libraries(main PRIVATE eclipse-paho-mqtt-c::paho-mqtt3a-static eclipse-paho-mqtt-c::paho-mqtt3c-static eclipse-paho-mqtt-c::paho-mqtt3as-static eclipse-paho-mqtt-c::paho-mqtt3cs-static)
-```
-
-
 
 ## Consuming the Azure C SDK
 
 See [Azure SDK for C: consume with cmake](https://github.com/Azure/azure-sdk-for-c#consume-sdk-for-c-as-dependency-with-cmake)
 
 
+## Setup the certs...
 ```bash
 mkdir certs
 cd certs
@@ -77,3 +71,8 @@ export AZ_IOT_DEVICE_X509_CERT_PEM_FILE_PATH=$(pwd)/device_cert_store.pem
 
 ```
 
+## Notes
+
+Some possible WIP things needed for `launch.json`, `tasks.json` and `settings.json` 
+
+see `build/_deps/azuresdkforc-src/.vscode-config` for ideas.
