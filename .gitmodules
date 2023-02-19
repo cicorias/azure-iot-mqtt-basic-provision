@@ -1,3 +1,0 @@
-[submodule "azsdk"]
-	path = azsdk
-	url = https://github.com/Azure/azure-sdk-for-c.git
