@@ -6,25 +6,53 @@ enable_testing()
 
 add_executable(azdpsprovision azdpsprovision.cpp)
 
-
 find_package(eclipse-paho-mqtt-c CONFIG REQUIRED)
 target_link_libraries(azdpsprovision PRIVATE eclipse-paho-mqtt-c::paho-mqtt3a-static eclipse-paho-mqtt-c::paho-mqtt3c-static eclipse-paho-mqtt-c::paho-mqtt3as-static eclipse-paho-mqtt-c::paho-mqtt3cs-static)
+# target_link_libraries(pahosdksample PRIVATE eclipse-paho-mqtt-c::paho-mqtt3a-static eclipse-paho-mqtt-c::paho-mqtt3c-static eclipse-paho-mqtt-c::paho-mqtt3as-static eclipse-paho-mqtt-c::paho-mqtt3cs-static)
 
 find_package(OpenSSL REQUIRED)
 target_link_libraries(azdpsprovision PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+# target_link_libraries(pahosdksample PRIVATE OpenSSL::SSL OpenSSL::Crypto)
 
-include(FetchContent)
-FetchContent_Declare(
-    azurecsdk
-    URL      https://github.com/Azure/azure-sdk-for-c/archive/refs/tags/1.5.0.tar.gz
-    URL_HASH MD5=396ea77b3108c4a2125924f77d4d9a3e
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake-modules")
+include(AddAzureSDKforC)
+target_link_libraries(azdpsprovision PRIVATE az_core)
+# target_link_libraries(pahosdksample PRIVATE az_core)
+
+
+# Azure IoT Samples Library
+
+# Azure IoT Samples Library
+add_library (az_iot_sample_common
+  ${CMAKE_CURRENT_LIST_DIR}/iot_sample_common.c
 )
-FetchContent_MakeAvailable(azurecsdk)
-# FetchContent_Declare(
-#     azurecsdk
-#     GIT_REPOSITORY https://github.com/Azure/azure-iot-sdk-c.git # 
-#     GIT_TAG        
-# )
+
+# Internal deps
+target_link_libraries(az_iot_sample_common
+  PUBLIC
+    az::iot::hub
+    az::iot::provisioning
+)
+
+# External deps
+target_link_libraries(az_iot_sample_common
+  PUBLIC
+    eclipse-paho-mqtt-c::paho-mqtt3cs-static
+    OpenSSL::SSL
+    OpenSSL::Crypto
+)
+
+add_library (az::iot::sample::common ALIAS az_iot_sample_common)
+
+# Provisioning (Certificates) Sample
+add_executable (paho_iot_provisioning_sample
+  ${CMAKE_CURRENT_LIST_DIR}/paho_iot_provisioning_sample.c
+)
+
+target_link_libraries(paho_iot_provisioning_sample
+  PRIVATE
+    az::iot::sample::common
+)
 
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
