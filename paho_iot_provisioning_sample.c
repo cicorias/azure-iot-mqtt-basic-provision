@@ -173,6 +173,7 @@ static void subscribe_mqtt_client_to_provisioning_service_topics(void)
         "Failed to subscribe to the Register topic: MQTTClient return code %d.", rc);
     exit(rc);
   }
+  IOT_SAMPLE_LOG_SUCCESS("success subscribed to topic %s\n", AZ_IOT_PROVISIONING_CLIENT_REGISTER_SUBSCRIBE_TOPIC);
 }
 
 static void register_device_with_provisioning_service(void)
@@ -203,6 +204,7 @@ static void register_device_with_provisioning_service(void)
     IOT_SAMPLE_LOG_ERROR("Failed to publish Register request: MQTTClient return code %d.", rc);
     exit(rc);
   }
+  IOT_SAMPLE_LOG_SUCCESS("success publish message to topic %s\n", register_topic_buffer);
 }
 
 static void receive_device_registration_status_message(void)
