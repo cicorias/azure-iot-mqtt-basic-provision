@@ -25,12 +25,12 @@
                     "name": "AZ_IOT_DEVICE_X509_CERT_PEM_FILE_PATH",
                     "value": "/workspaces/azure-iot-mqtt-basic-provision/certs/device_cert_store.pem"},
                 {
-                    "name": "AZ_IOT_PROVISIONING_ID_SCOPE",
-                    "value": "foobar"
+                    "name": "_AZ_IOT_PROVISIONING_ID_SCOPE",
+                    "value": "foobarF"
                 },
                 {
-                    "name": "AZ_IOT_PROVISIONING_REGISTRATION_ID",
-                    "value":"paho-client-1"
+                    "name": "_AZ_IOT_PROVISIONING_REGISTRATION_ID",
+                    "value":"paho-sample-device1"
                 }
             ],
             // "console": "externalTerminal",
