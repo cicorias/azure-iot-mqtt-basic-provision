@@ -136,13 +136,17 @@ static void connect_mqtt_client_to_provisioning_service(void)
   MQTTClient_connectOptions mqtt_connect_options = MQTTClient_connectOptions_initializer;
   mqtt_connect_options.username = mqtt_client_username_buffer;
   mqtt_connect_options.password = NULL; // This sample uses x509 authentication.
-  mqtt_connect_options.cleansession = false; // Set to false so can receive any pending messages.
+  mqtt_connect_options.cleansession = true;// false; // Set to false so can receive any pending messages.
   mqtt_connect_options.keepAliveInterval = AZ_IOT_DEFAULT_MQTT_CONNECT_KEEPALIVE_SECONDS;
+  mqtt_connect_options.MQTTVersion = MQTTVERSION_3_1_1;
 
   MQTTClient_SSLOptions mqtt_ssl_options = MQTTClient_SSLOptions_initializer;
   mqtt_ssl_options.verify = 1;
   mqtt_ssl_options.enableServerCertAuth = 1;
   mqtt_ssl_options.keyStore = (char*)az_span_ptr(env_vars.x509_cert_pem_file_path);
+
+  mqtt_ssl_options.privateKey = (char*)az_span_ptr(env_vars.x509_key_pem_file_path);
+
   if (az_span_size(env_vars.x509_trust_pem_file_path) != 0) // Is only set if required by OS.
   {
     mqtt_ssl_options.trustStore = (char*)az_span_ptr(env_vars.x509_trust_pem_file_path);

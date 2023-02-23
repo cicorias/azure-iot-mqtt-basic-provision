@@ -109,7 +109,9 @@ bool get_az_span(az_span* out_span, char const* const error_message, ...);
 
 // DO NOT MODIFY: the path to a PEM file containing the device certificate and
 // key as well as any intermediate certificates chaining to an uploaded group certificate.
+// NOTE: the private KEY in THIS file is not handled well.
 #define IOT_SAMPLE_ENV_DEVICE_X509_CERT_PEM_FILE_PATH "AZ_IOT_DEVICE_X509_CERT_PEM_FILE_PATH"
+#define IOT_SAMPLE_ENV_DEVICE_X509_KEY_PEM_FILE_PATH "AC_IOT_DEVICE_X509_KEY_PEM_FILE_PATH"
 
 // DO NOT MODIFY: the path to a PEM file containing the server trusted CA
 // This is usually not needed on Linux or Mac but needs to be set on Windows.
@@ -124,6 +126,7 @@ typedef struct
   az_span provisioning_registration_id;
   az_span provisioning_sas_key;
   az_span x509_cert_pem_file_path;
+  az_span x509_key_pem_file_path;
   az_span x509_trust_pem_file_path;
   uint32_t sas_key_duration_minutes;
 } iot_sample_environment_variables;

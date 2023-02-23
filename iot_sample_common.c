@@ -54,6 +54,7 @@ static char iot_sample_hub_sas_key_buffer[128];
 static char iot_sample_provisioning_sas_key_buffer[128];
 
 static char iot_sample_x509_cert_pem_file_path_buffer[256];
+static char iot_sample_x509_key_pem_file_path_buffer[256];
 static char iot_sample_x509_trust_pem_file_path_buffer[256];
 
 //
@@ -262,6 +263,15 @@ void iot_sample_read_environment_variables(
             show_value,
             out_env_vars->x509_cert_pem_file_path,
             &(out_env_vars->x509_cert_pem_file_path));
+
+        out_env_vars->x509_key_pem_file_path
+          = AZ_SPAN_FROM_BUFFER(iot_sample_x509_key_pem_file_path_buffer);
+        read_configuration_entry(
+            IOT_SAMPLE_ENV_DEVICE_X509_KEY_PEM_FILE_PATH,
+            NULL,
+            show_value,
+            out_env_vars->x509_key_pem_file_path,
+            &(out_env_vars->x509_key_pem_file_path));
         break;
 
       case PAHO_IOT_PROVISIONING_SAS_SAMPLE:

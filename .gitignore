@@ -16,3 +16,9 @@ build/
 .vscode/settings.json
 certs/**/*.pem
 certs/fingerprint.txt
+
+!certs/BaltimoreCyberTrustRoot.crt.pem
+
+dps-chain-clients/
+certs3/
+certs/certs-from-andres/
